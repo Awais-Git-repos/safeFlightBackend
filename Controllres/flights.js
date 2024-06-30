@@ -52,8 +52,9 @@ const payment = async (req, res) => {
     try {
         const offer = await duffel.offers.get(offerId);
         const payment = offer?.data?.total_amount;
-        console.log(parseFloat(payment) + 2);
-        const pay = parseFloat(payment) + 32;
+        // const pay = parseFloat(payment) + 32;
+        const pay = (parseFloat(payment) + 32).toFixed(2)
+        console.log(pay);
         try {
             const payments = await duffel.paymentIntents.create({
                 "currency": "GBP",
