@@ -18,28 +18,29 @@ app.get('/', (req, res) => {
 
 
 import flightRoutes from './Routes/flights.js'
-// import user from './Routes/user.js'
+import user from './Routes/user.js'
+
 // FLIGHTS
 app.use('/api/flights', flightRoutes)
 
 // User Registration
-// app.use('/api/user', user);
+app.use('/api/user', user);
 
 
 
-// function database() {
-//     try {
-//         const node = server
-//         db(node)
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
+function database() {
+    try {
+        const node = server
+        db(node)
+    } catch (error) {
+        console.log(error);
+    }
+}
 
-// database()
+database()
 
 function server() {
     app.listen(port, () => { console.log('Server Listening on PORT: ', port) })
 }
 
-server();
+// server();

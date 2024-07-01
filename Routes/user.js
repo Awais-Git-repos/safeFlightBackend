@@ -1,15 +1,12 @@
-// import express from 'express'
-// const routes = express.Router();
-// // import { registerValidationRules, validate } from '../Utilis/Validations/validations'
+import express from 'express'
+const routes = express.Router();
+import { registerValidationRules, validate } from '../Utilis/Validations/validations.js'
 
-// import { Register } from '../Controllres/user';
+import { register, Login } from '../Controllres/user.js';
+// @POST USER REGISTRATION
+// routes.post('/register', register)
 
+routes.post('/register', registerValidationRules(), validate, register)
+routes.post('/login', Login);
 
-// // @POST USER REGISTRATION
-// routes.post('/register', Register)
-// // routes.post('/login', Login)
-
-// // Get
-// // routes.get('/', AllUserData)
-
-// export default routes
+export default routes
