@@ -1,4 +1,5 @@
 import User from '../models/User.js';
+import Order from '../models/Order.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer'
@@ -58,4 +59,86 @@ const Login = async (req, res) => {
 
     }
 }
-export { register, Login }
+
+const getUserData = async (req, res) => {
+    const { id } = req.user
+    try {
+        const response = await User.findOne({ _id: id })
+        console.log(response);
+        return res.status(200).json(response)
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json(error)
+    }
+}
+
+
+const updatePersonalInfo = async (req, res) => {
+    const { id } = req.user;
+    const { name, email, phone } = req.body
+    try {
+        const response = await User.findOneAndUpdate(
+            { _id: id },
+            { $set: { name, email, phone } },
+            { new: true }
+        );
+        console.log(response);
+        return res.status(200).json(response)
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json(error)
+    }
+}
+
+
+
+// -----------------------ADMIN ACTIONS-------------------
+
+const getAllUserData = async (req, res) => {
+    try {
+        const response = await User.find();
+        console.log(response);
+        return res.status(200).json(response)
+    } catch (error) {
+        console.log(error)
+        return res.status(400).json(error)
+    }
+}
+
+const getSpecificUserData = async (req, res) => {
+    const { name } = req.body;
+    try {
+        const response = await User.findOne({ name: name })
+        console.log(response);
+        return res.status(200).json(response)
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json(error)
+    }
+}
+
+const deleteUserData = async (req, res) => {
+    const { id } = req.body
+    try {
+        const response = await User.deleteOne({ _id: id })
+        console.log(response);
+        return res.status(200).json(response)
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json(error)
+    }
+}
+
+const deleteAccount = async (req, res) => {
+    const { id } = req.user
+    try {
+        const response = await User.deleteOne({ _id: id })
+        console.log(response);
+        return res.status(200).json(response)
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json(error)
+    }
+}
+
+export { register, Login, getUserData, getAllUserData, getSpecificUserData, deleteUserData, updatePersonalInfo, deleteAccount }

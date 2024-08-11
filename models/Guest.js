@@ -15,21 +15,12 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    password: {
-        type: String,
-        required: true
-    },
-    role: {
-        type: Number,
-        required: true,
-        default: 0
-    },
     created_at: {
         type: Date,
         default: Date.now()
     }
 })
 
-export default mongoose.model('user', userSchema);
+export default mongoose.model('guest', userSchema);
 
 // module.exports = mongoose.model('user', userSchema)

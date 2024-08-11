@@ -17,14 +17,22 @@ app.get('/', (req, res) => {
 
 
 import flightRoutes from './Routes/flights.js'
+import hotelRoutes from './Routes/hotels.js'
 import user from './Routes/user.js'
 
 // FLIGHTS
 app.use('/api/flights', flightRoutes)
 
+// Hotels
+app.use('/api/hotels', hotelRoutes)
+
 // User Registration
 app.use('/api/user', user);
 
+
+app.get('/',(req,res)=>{
+    res.status(200).json({msg:'Hello world'})
+});
 
 
 function database() {
